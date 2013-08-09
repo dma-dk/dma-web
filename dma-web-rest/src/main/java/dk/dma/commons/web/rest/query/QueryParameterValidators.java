@@ -115,18 +115,24 @@ public class QueryParameterValidators {
         return result;
     }
 
-    public static String getParameterWithCustomErrorMessage(UriInfo info, String param, String customErrorMessage) {
-        String s = getParameter(info, param, null);
+    /**
+     * Identical to {@link #getParameter(UriInfo, String)} except that this method will throw a custom error message.
+     * 
+     * @param info
+     *            the URI info
+     * @param parameterName
+     *            the name of the parameter
+     * @param customErrorMessage
+     *            the custom error message to throw
+     * @return the value of the specified parameter
+     */
+    public static String getParameterWithCustomErrorMessage(UriInfo info, String parameterName,
+            String customErrorMessage) {
+        String s = getParameter(info, parameterName, null);
         if (s == null) {
             throw new QueryParameterException(info, customErrorMessage);
         }
         return s;
-    }
-
-    public static void main(String[] args) {
-        Range<Integer> r = Range.closed(10, 1000);
-        System.out.println(r.contains(9));
-        System.out.println(r.contains(10));
     }
 
     /**

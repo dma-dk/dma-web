@@ -21,6 +21,7 @@ import javax.servlet.ServletConfig;
 import javax.ws.rs.core.Context;
 
 /**
+ * The base class of REST resources.
  * 
  * @author Kasper Nielsen
  */

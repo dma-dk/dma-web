@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
-package dk.dma.commons.web.rest.exceptionmapper;
+package dk.dma.commons.web.rest.defaults;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
@@ -26,7 +26,7 @@ import javax.ws.rs.ext.Provider;
  * @author Kasper Nielsen
  */
 @Provider
-public class DefaultExceptionMapper implements ExceptionMapper<WebApplicationException> {
+public class DmaExceptionMapper implements ExceptionMapper<WebApplicationException> {
 
     @Override
     public Response toResponse(WebApplicationException e) {
