@@ -22,7 +22,6 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyWriter;
@@ -52,7 +51,7 @@ public class JSONObjectMessageBodyWriter implements MessageBodyWriter<JSONObject
     @Override
     public void writeTo(JSONObject myBean, Class<?> type, Type genericType, Annotation[] annotations,
             MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream)
-            throws IOException, WebApplicationException {
+            throws IOException {
         new PrintWriter(entityStream).append(myBean.toString()).flush();
     }
 }

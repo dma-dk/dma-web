@@ -15,6 +15,7 @@
  */
 package dk.dma.commons.web.rest;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletConfig;
@@ -41,8 +42,14 @@ public class AbstractResource {
         return t;
     }
 
-    public static void install(Object o) {
-
+    public static Map<Class<?>, Object> create(Object... o) {
+        Map<Class<?>, Object> m = new HashMap<>();
+        for (Object oo : o) {
+            if (oo != null) {
+                m.put(oo.getClass(), oo);
+            }
+        }
+        return m;
     }
 
     public static <T> void install(T o, Class<T> type) {
