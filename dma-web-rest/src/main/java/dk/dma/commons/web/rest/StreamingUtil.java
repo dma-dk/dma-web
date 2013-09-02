@@ -20,6 +20,7 @@ import static java.util.Objects.requireNonNull;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.concurrent.Future;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.StreamingOutput;
@@ -55,6 +56,39 @@ public class StreamingUtil {
                 } catch (RuntimeException | Error e) {
                     throw e;
                 } catch (Exception e) {
+                    throw new WebApplicationException(e);
+                }
+            }
+        };
+    }
+
+    /**
+     * Creates a streaming output from the specified iterable and output stream sink.
+     * 
+     * @param i
+     *            the iterable to stream
+     * @param sink
+     *            the sink to stream to
+     * @return
+     */
+    public static <T> StreamingOutput createStreamingOutput(final Iterable<T> i, final OutputStreamSink<T> sink,
+            final Future<?> future) {
+        requireNonNull(i);
+        requireNonNull(sink);
+        requireNonNull(future);
+        return new StreamingOutput() {
+            @Override
+            public void write(OutputStream paramOutputStream) throws IOException {
+                try {
+                    try (BufferedOutputStream bos = new BufferedOutputStream(paramOutputStream);) {
+                        sink.writeAll(i, bos);
+                    }
+                    paramOutputStream.close();
+                } catch (RuntimeException | Error e) {
+                    future.cancel(false);
+                    throw e;
+                } catch (Exception e) {
+                    future.cancel(false);
                     throw new WebApplicationException(e);
                 }
             }

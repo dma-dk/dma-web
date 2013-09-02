@@ -37,7 +37,8 @@ public class AbstractResource {
         Map<Class<?>, Object> m = (Map<Class<?>, Object>) servletConfig.getServletContext().getAttribute(CONFIG);
         T t = (T) m.get(type);
         if (t == null) {
-            throw new UnsupportedOperationException();
+            throw new UnsupportedOperationException("Could not find a service of type " + type
+                    + ". Available types are " + m.keySet());
         }
         return t;
     }

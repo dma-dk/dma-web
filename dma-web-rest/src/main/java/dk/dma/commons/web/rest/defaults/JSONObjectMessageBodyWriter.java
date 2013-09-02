@@ -30,6 +30,8 @@ import javax.ws.rs.ext.Provider;
 import dk.dma.commons.util.JSONObject;
 
 /**
+ * If the system fails to find this message body writer. Make sure the annotated method using this writer has this
+ * annotation <code>@Produces("application//json")</code>
  * 
  * @author Kasper Nielsen
  */
