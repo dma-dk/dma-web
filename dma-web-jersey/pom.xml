@@ -136,15 +136,32 @@
                   <goal>shade</goal>
                 </goals>
                 <configuration>
-                  <!--  <transformers> <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                    <mainClass>org.cakeframework.internal.Main</mainClass> </transformer>
-                    </transformers> -->
+               <shadedArtifactAttached>false</shadedArtifactAttached>
+                  <createDependencyReducedPom>true</createDependencyReducedPom>
+
+                  <relocations>
+                    <relocation>
+                      <pattern>org.objectweb.asm</pattern>
+                      <shadedPattern>dk.dma.web.jersey.repacked.org.objectweb.asm</shadedPattern>
+                    </relocation>
+                    <relocation>
+                      <pattern>com.google</pattern>
+                      <shadedPattern>dk.dma.web.jersey.repacked.com.google</shadedPattern>
+                    </relocation>
+                    <relocation>
+                      <pattern>net.sf</pattern>
+                      <shadedPattern>dk.dma.web.jersey.repacked.net.sf</shadedPattern>
+                    </relocation>
+                  </relocations>
                   <filters>
                     <filter>
                       <artifact>*:*</artifact>
                       <excludes>
                         <exclude>META-INF/**/pom.xml</exclude>
                         <exclude>META-INF/**/pom.properties</exclude>
+                        <exclude>META-INF/*.SF</exclude>
+                        <exclude>META-INF/*.DSA</exclude>
+                        <exclude>META-INF/*.RSA</exclude>
                       </excludes>
                     </filter>
                   </filters>
