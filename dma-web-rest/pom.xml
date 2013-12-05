@@ -18,7 +18,7 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>dma-web-jersey</artifactId>
-      <version>2.4.1</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
