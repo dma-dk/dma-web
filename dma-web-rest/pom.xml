@@ -15,15 +15,29 @@
   <description>The DMA Web Rest</description>
 
   <dependencies>
-    <!-- <dependency> <groupId>org.eclipse.jetty</groupId> <artifactId>jetty-server</artifactId>
-      <version>${dependencies.jetty.version}</version> </dependency> <dependency>
-      <groupId>org.eclipse.jetty</groupId> <artifactId>jetty-servlet</artifactId>
-      <version>${dependencies.jetty.version}</version> </dependency>
--->
-
     <dependency>
-      <groupId>org.glassfish.jersey.containers</groupId>
-      <artifactId>jersey-container-servlet</artifactId>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>dma-web-jersey</artifactId>
+      <version>2.4.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${dependencies.slf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+      <version>1.1.0.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.annotation</groupId>
+      <artifactId>javax.annotation-api</artifactId>
+      <version>1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>javax.ws.rs-api</artifactId>
       <version>2.0</version>
     </dependency>
 
@@ -31,6 +45,12 @@
       <groupId>dk.dma.commons</groupId>
       <artifactId>dma-commons-util</artifactId>
       <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>${dependencies.servlet.version}</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 

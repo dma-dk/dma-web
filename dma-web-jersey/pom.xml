@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2008 Kasper Nielsen.
+ Licensed 
+  under the Apache License, Version 2.0 (the "License"); you may not use this 
+  file except in compliance with the License. You may obtain a copy of the 
+  License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by 
+  applicable law or agreed to in writing, software distributed under the License 
+  is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY 
+  KIND, either express or implied. See the License for the specific language 
+  governing permissions and limitations under the License. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <parent>
+    <groupId>dk.dma.web</groupId>
+    <artifactId>dma-web-parent</artifactId>
+    <version>0.1-SNAPSHOT</version>
+  </parent>
+
+  <groupId>dk.dma.web</groupId>
+  <packaging>jar</packaging>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>dma-web-jersey</artifactId>
+  <name>DMA Web Jersey</name>
+  <dependencies>
+    <dependency>
+      <groupId>org.glassfish.jersey.containers</groupId>
+      <artifactId>jersey-container-servlet</artifactId>
+      <version>2.4.1</version>
+      <exclusions>
+        <exclusion>
+          <groupId>javax.servlet</groupId>
+          <artifactId>javax.servlet-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.glassfish.hk2.external</groupId>
+          <artifactId>javax.inject</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>javax.validation</groupId>
+          <artifactId>validation-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>javax.annotation</groupId>
+          <artifactId>javax.annotation-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>javax.ws.rs</groupId>
+          <artifactId>javax.ws.rs-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+  </dependencies>
+
+  <profiles>
+    <profile>
+      <id>default</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>1.7</version>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>shade</goal>
+                </goals>
+                <configuration>
+
+                  <shadedArtifactAttached>false</shadedArtifactAttached>
+                  <createDependencyReducedPom>true</createDependencyReducedPom>
+
+                  <relocations>
+                    <relocation>
+                      <pattern>org.objectweb.asm</pattern>
+                      <shadedPattern>dk.dma.web.jersey.repacked.org.objectweb.asm</shadedPattern>
+                    </relocation>
+                    <relocation>
+                      <pattern>com.google</pattern>
+                      <shadedPattern>dk.dma.web.jersey.repacked.com.google</shadedPattern>
+                    </relocation>
+                    <relocation>
+                      <pattern>net.sf</pattern>
+                      <shadedPattern>dk.dma.web.jersey.repacked.net.sf</shadedPattern>
+                    </relocation>
+                  </relocations>
+
+                  <filters>
+                    <filter>
+                      <artifact>*:*</artifact>
+                      <excludes>
+                        <exclude>META-INF/**/pom.xml</exclude>
+                        <exclude>META-INF/**/pom.properties</exclude>
+                        <exclude>META-INF/*.SF</exclude>
+                        <exclude>META-INF/*.DSA</exclude>
+                        <exclude>META-INF/*.RSA</exclude>
+                      </excludes>
+                    </filter>
+                  </filters>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>includeSrcJavadocs</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>includeSrcJavadocs</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>1.7</version>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>shade</goal>
+                </goals>
+                <configuration>
+                  <!--  <transformers> <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                    <mainClass>org.cakeframework.internal.Main</mainClass> </transformer>
+                    </transformers> -->
+                  <filters>
+                    <filter>
+                      <artifact>*:*</artifact>
+                      <excludes>
+                        <exclude>META-INF/**/pom.xml</exclude>
+                        <exclude>META-INF/**/pom.properties</exclude>
+                      </excludes>
+                    </filter>
+                  </filters>
+                  <createSourcesJar>true</createSourcesJar>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>
