@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>dk.dma.web</groupId>
     <artifactId>dma-web-parent</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1</version>
   </parent>
 
   <artifactId>dma-web-rest</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <version>0.1</version>
   <name>DMA Web Rest</name>
   <description>The DMA Web Rest</description>
 
@@ -44,7 +43,7 @@
     <dependency>
       <groupId>dk.dma.commons</groupId>
       <artifactId>dma-commons-util</artifactId>
-      <version>${project.version}</version>
+      <version>0.1</version>
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
