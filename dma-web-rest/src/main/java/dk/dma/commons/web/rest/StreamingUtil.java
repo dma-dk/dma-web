@@ -20,7 +20,10 @@ import static java.util.Objects.requireNonNull;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.UUID;
 import java.util.concurrent.Future;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.StreamingOutput;
@@ -53,6 +56,39 @@ public class StreamingUtil {
                         sink.writeAll(i, bos);
                     }
                     paramOutputStream.close();
+                } catch (RuntimeException | Error e) {
+                    throw e;
+                } catch (Exception e) {
+                    throw new WebApplicationException(e);
+                }
+            }
+        };
+    }
+
+    /**
+     * Creates a zipped streaming output from the specified iterable and output stream sink.
+     *
+     * @param i
+     *            the iterable to stream
+     * @param sink
+     *            the sink to process the iterables to produce output for the stream
+     * @param zipEntryName
+     *            the name of the single ZipEntry carried in the zipped output stream (like a filename in a zip file)
+     * @return
+     */
+    public static <T> StreamingOutput createZippedStreamingOutput(final Iterable<T> i, final OutputStreamSink<T> sink, final String zipEntryName) {
+        requireNonNull(i);
+        requireNonNull(sink);
+        return new StreamingOutput() {
+            @Override
+            public void write(OutputStream outputStream) throws IOException {
+                try {
+                    try (ZipOutputStream zos = new ZipOutputStream(new BufferedOutputStream(outputStream))) { // http://goo.gl/UFb41j
+                        zos.putNextEntry(new ZipEntry(zipEntryName));
+                        sink.writeAll(i, zos);
+                        zos.closeEntry();
+                    }
+                    outputStream.close();
                 } catch (RuntimeException | Error e) {
                     throw e;
                 } catch (Exception e) {
