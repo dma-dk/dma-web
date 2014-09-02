@@ -5,11 +5,11 @@
   <parent>
     <groupId>dk.dma.web</groupId>
     <artifactId>dma-web-parent</artifactId>
-    <version>0.2</version>
+    <version>0.3-SNAPSHOT</version>
   </parent>
 
   <artifactId>dma-web-rest</artifactId>
-  <version>0.2</version>
+  <version>0.3-SNAPSHOT</version>
   <name>DMA Web Rest</name>
   <description>The DMA Web Rest</description>
 
