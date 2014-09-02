@@ -43,7 +43,7 @@
     <dependency>
       <groupId>dk.dma.commons</groupId>
       <artifactId>dma-commons-util</artifactId>
-      <version>0.1</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
