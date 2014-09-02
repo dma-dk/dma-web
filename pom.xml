@@ -10,7 +10,7 @@
 
   <groupId>dk.dma.web</groupId>
   <artifactId>dma-web-parent</artifactId>
-  <version>0.3-SNAPSHOT</version>
+  <version>0.2-SNAPSHOT</version>
   <name>DMA Web Parent</name>
   <packaging>pom</packaging>
   <description>This parent pom for DMA Web</description>

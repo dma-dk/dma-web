@@ -5,11 +5,11 @@
   <parent>
     <groupId>dk.dma.web</groupId>
     <artifactId>dma-web-parent</artifactId>
-    <version>0.3-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
   </parent>
 
   <artifactId>dma-web-rest</artifactId>
-  <version>0.3-SNAPSHOT</version>
+  <version>0.2-SNAPSHOT</version>
   <name>DMA Web Rest</name>
   <description>The DMA Web Rest</description>
 
@@ -43,7 +43,7 @@
     <dependency>
       <groupId>dk.dma.commons</groupId>
       <artifactId>dma-commons-util</artifactId>
-      <version>${project.version}</version>
+      <version>0.1</version>
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
